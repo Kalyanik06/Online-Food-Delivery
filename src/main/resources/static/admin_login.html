@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Auth</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: #A8A8A8;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 600px;
+            height: 500px; /* Increased to fit signup form */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-flex;
+        }
+
+        .backbox {
+            background-color: #404040;
+            width: 100%;
+            height: 80%;
+            position: absolute;
+            transform: translate(0, -50%);
+            top: 50%;
+            display: inline-flex;
+        }
+
+        .frontbox {
+            background-color: white;
+            border-radius: 20px;
+            height: 100%;
+            width: 50%;
+            z-index: 10;
+            position: absolute;
+            right: 0;
+            margin-right: 3%;
+            margin-left: 3%;
+            transition: right .8s ease-in-out;
+            overflow-y: auto; /* Allow scroll if form is longer */
+        }
+
+        .moving {
+            right: 45%;
+        }
+
+        .loginMsg, .signupMsg {
+            width: 50%;
+            height: 100%;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .loginMsg .title,
+        .signupMsg .title {
+            font-weight: 300;
+            font-size: 23px;
+        }
+
+        .textcontent {
+            color: white;
+            margin-top: 65px;
+            margin-left: 12%;
+        }
+
+        .loginMsg button,
+        .signupMsg button {
+            background-color: #404040;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 300;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .login, .signup {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .login h2,
+        .signup h2 {
+            color: #35B729;
+            font-size: 22px;
+        }
+
+        .inputbox {
+            margin-top: 30px;
+        }
+
+        .login input,
+        .signup input {
+            display: block;
+            width: 100%;
+            height: 40px;
+            background-color: #f2f2f2;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 12px;
+            padding-left: 10px;
+        }
+
+        .login button,
+        .signup button {
+            background-color: #35B729;
+            border: none;
+            color: white;
+            font-size: 12px;
+            font-weight: 300;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .login p {
+            cursor: pointer;
+            color: #404040;
+            font-size: 15px;
+        }
+
+        .visibility {
+            opacity: 0;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.location.href='/admin/login'" style="padding: 10px 20px; margin-right: 10px; margin-top:30px; background-color: #35B729; color: white; border: none; border-radius: 10px; cursor: pointer;">Admin Login</button>
+    <button onclick="window.location.href='/user/login'" style="padding: 10px 20px; margin-top:30px; background-color: #404040; color: white; border: none; border-radius: 10px; cursor: pointer;">User Login</button>
+</div>
+
+<div class="container">
+    <div class="backbox">
+        <div class="loginMsg">
+            <div class="textcontent">
+                <p class="title">Don't have an account?</p>
+                <p>Sign up to save all your graphs.</p>
+                <button id="switch1">Sign Up</button>
+            </div>
+        </div>
+        <div class="signupMsg visibility">
+            <div class="textcontent">
+                <p class="title">Have an account?</p>
+                <p>Log in to see all your collection.</p>
+                <button id="switch2">LOG IN</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="frontbox">
+        <!-- Login Form -->
+        <form action="/admin/login" method="post" class="login">
+            <h2>ADMIN LOG IN</h2>
+            <div class="inputbox">
+                <input type="text" name="email" placeholder="EMAIL" required>
+                <input type="password" name="password" placeholder="PASSWORD" required>
+            </div>
+            <button type="submit">LOG IN</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form action="/admin/signup" method="POST" class="signup hide">
+            <h2>ADMIN SIGN UP</h2>
+            <div class="inputbox">
+                <input type="text" name="firstname" placeholder="First Name" required>
+                <input type="text" name="lastname" placeholder="Last Name" required>
+                <input type="text" name="contactno" placeholder="Contact No" required>
+                <input type="text" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">SIGN UP</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    var $loginMsg = $('.loginMsg'),
+        $login = $('.login'),
+        $signupMsg = $('.signupMsg'),
+        $signup = $('.signup'),
+        $frontbox = $('.frontbox');
+
+    $('#switch1').on('click', function() {
+        $loginMsg.toggleClass("visibility");
+        $frontbox.addClass("moving");
+        $signupMsg.toggleClass("visibility");
+
+        $signup.toggleClass('hide');
+        $login.toggleClass('hide');
+    });
+
+    $('#switch2').on('click', function() {
+        $loginMsg.toggleClass("visibility");
+        $frontbox.removeClass("moving");
+        $signupMsg.toggleClass("visibility");
+
+        $signup.toggleClass('hide');
+        $login.toggleClass('hide');
+    });
+
+    setTimeout(function() {
+        $('#switch1').click();
+    }, 1000);
+
+    setTimeout(function() {
+        $('#switch2').click();
+    }, 3000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Home - Fablo</title>
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body, html {
+          height: 100%;
+          font-family: Arial, sans-serif;
+        }
+
+        header {
+          background-color: #000;
+          padding: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: white;
+          position: absolute;
+          width: 100%;
+          z-index: 10;
+        }
+
+        header h1 {
+          color: #ae7110;
+        }
+
+        nav a {
+          color: #ae7110;
+          text-decoration: none;
+          margin: 0 15px;
+        }
+
+        nav a:hover {
+          color: #5d3a03;
+        }
+
+        .hero {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          background-image: url('/images/vecteezy_ai-generated-beautuful-fast-food-background-with-copy-space_37236648.jpg');
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          color: white;
+          text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        .hero h2, .hero p {
+          opacity: 0;
+          transform: translateX(-100%);
+          transition: all 1s ease;
+        }
+
+        .hero.show h2, .hero.show p {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .hero h2 {
+          font-size: 3rem;
+          margin-bottom: 20px;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+          max-width: 600px;
+          color: #f0c073;
+        }
+
+        .quick-links {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .quick-links a {
+          padding: 15px 25px;
+          background-color: #fca311;
+          color: #000;
+          text-decoration: none;
+          font-weight: bold;
+          border-radius: 8px;
+          transition: background-color 0.3s;
+        }
+
+        .quick-links a:hover {
+          background-color: #ffba3a;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1>Fablo</h1>
+    <nav>
+        <a href="user_dashboard.html">Home</a>
+        <a href="about1.html">About</a>
+        <a href="/menu">Menu</a>
+        <a href="review.html">Review</a>
+    </nav>
+</header>
+
+<div class="hero" id="hero">
+    <h2>Welcome back, Foodie!</h2>
+    <p>What would you like to do today?</p>
+    <div class="quick-links">
+        <a href="/menu">View Menu</a>
+        <a href="review.html">Leave a Review</a>
+        <a href="about1.html">About Us</a>
+        <a href="index.html">Log Out</a>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+      document.getElementById('hero').classList.add('show');
+    });
+</script>
+</body>
+
+</html>
